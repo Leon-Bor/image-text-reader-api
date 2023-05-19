@@ -13,7 +13,7 @@ COPY package*.json ./
 
 # Install app dependencies
 RUN npm install -g @nestjs/cli --production
-RUN npm install --production
+RUN npm install
 
 # Bundle app source
 COPY . .
