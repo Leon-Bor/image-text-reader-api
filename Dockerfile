@@ -12,6 +12,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install app dependencies
+RUN npm install -g @nestjs/cli --production
 RUN npm install --production
 
 # Bundle app source
