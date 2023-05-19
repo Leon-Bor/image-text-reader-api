@@ -45,6 +45,8 @@
               Submit
             </button>
           </form>
+
+          <p id="data" style="margin-top: 30px"></p>
         </div>
         <div class="col"></div>
       </div>
@@ -53,6 +55,7 @@
     <script>
       $(document).ready(function () {
         $('#submit').click(function (e) {
+          $('#data').text('Waiting...');
           e.preventDefault();
           const file = $('#image').prop('files')[0];
 
@@ -71,6 +74,11 @@
             contentType: false, // tell jQuery not to set contentType
             success: function (data) {
               console.log(data);
+              if (data.data) {
+                $('#data').text(data.data);
+              } else {
+                $('#data').text('Error.');
+              }
             },
           });
         });

@@ -1,13 +1,7 @@
 # Base image
-FROM node:18
+FROM node:18-slim
 
 RUN apt-get update && apt-get install -y \
-    build-essential \
-    libcairo2-dev \
-    libpango1.0-dev \
-    libjpeg-dev \
-    libgif-dev \
-    librsvg2-dev \
     tesseract-ocr \
     tesseract-ocr-deu
 
@@ -18,13 +12,16 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install app dependencies
-RUN npm install
+RUN npm install --production
 
 # Bundle app source
 COPY . .
 
 # Creates a "dist" folder with the production build
 RUN npm run build
+
+# remove non used code
+RUN npm prune --production 
 
 # Start the server using the production build
 CMD [ "node", "dist/main.js" ]
