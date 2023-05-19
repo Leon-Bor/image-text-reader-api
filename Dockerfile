@@ -23,5 +23,7 @@ RUN npm run build
 # remove non used code
 RUN npm prune --production 
 
+# Port
+EXPOSE 3000
 # Start the server using the production build
 CMD [ "node", "dist/main.js" ]
